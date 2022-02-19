@@ -104,7 +104,7 @@ class User extends Admin
 				$save_data['avatar'] = $user_avatar_name_copy;
 			}
 
-			$save_user = $this->aauth->create_user($this->input->post('email'), $this->input->post('password'), $this->input->post('username'), $save_data);
+			$save_user = $this->aauth->create_user($this->input->post('email'), $this->input->post('password'), FALSE, $save_data);
 
 			if ($save_user) {
 				//add user to group
@@ -210,7 +210,7 @@ class User extends Admin
 				$password = false;
 			}
 
-			$save_user = $this->aauth->update_user($id, $this->input->post('email'), $password, $this->input->post('username'), $save_data);
+			$save_user = $this->aauth->update_user($id, $this->input->post('email'), $password, FALSE, $save_data);
 
 			if ($save_user) {
 				//update user to group
@@ -374,7 +374,7 @@ class User extends Admin
 				$password = false;
 			}
 
-			$save_user = $this->aauth->update_user($id, $this->input->post('email'), $password, $this->input->post('username'), $save_data);
+			$save_user = $this->aauth->update_user($id, $this->input->post('email'), $password, FALSE, $save_data);
 
 			if ($save_user) {
 				$this->data['success'] = true;

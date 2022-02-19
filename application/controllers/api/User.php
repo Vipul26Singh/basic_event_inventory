@@ -286,7 +286,7 @@ class User extends API
 				$save_data['avatar'] = $upload['file_name'];
 			}
 
-			$save_user = $this->aauth->create_user($this->post('email'), $this->post('password'), $this->post('email'), $save_data);
+			$save_user = $this->aauth->create_user($this->post('email'), $this->post('password'), FALSE, $save_data);
 
 			if ($save_user) {
 				$group = json_decode($this->post('group'));
@@ -368,7 +368,7 @@ class User extends API
                                 $save_data['avatar'] = $upload['file_name'];
                         }
 
-                        $save_user = $this->aauth->create_user($this->post('email'), $this->post('password'), $this->post('email'), $save_data);
+                        $save_user = $this->aauth->create_user($this->post('email'), $this->post('password'), FALSE, $save_data);
                         if ($save_user) {
                                 $group = json_decode($this->post('group'));
 

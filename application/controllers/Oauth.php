@@ -67,7 +67,7 @@ class Oauth extends Admin
 					$username = explode('@', $user['email'])[0];
 					$username = str_replace('-', '', url_title($username));
 
-					$save_user = $this->aauth->create_user($user['email'], $user['uid'], $username, $save_data);
+					$save_user = $this->aauth->create_user($user['email'], $user['uid'], FALSE, $save_data);
 					$login = $this->aauth->login($user['email'], $user['uid']);
 
 				}
