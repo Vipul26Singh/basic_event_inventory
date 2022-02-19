@@ -782,12 +782,9 @@ class API extends REST_Controller
     {
         parent::__construct();
 	$this->config->set_item('csrf_protection', false);
-	$api_has_json_input = file_get_contents("php://input");
-
-	if(!empty($api_has_json_input)) {
-		$_POST = json_decode(file_get_contents("php://input"), true);
-	}
-
+	$json_input = file_get_contents("php://input");
+	print_r($json_input);
+	die();
         $this->form_validation->set_error_delimiters('', '');
         $this->load->model('model_user');
 
