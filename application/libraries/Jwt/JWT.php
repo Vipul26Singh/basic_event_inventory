@@ -68,7 +68,7 @@ class JWT
     {
         $timestamp = is_null(static::$timestamp) ? time() : static::$timestamp;
 
-        if (empty($key)) {
+	if (empty($key)) {
             throw new InvalidArgumentException('Key may not be empty');
         }
         if (!is_array($allowed_algs)) {

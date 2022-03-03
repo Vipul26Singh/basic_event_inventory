@@ -43,10 +43,12 @@ class User extends API
 
 		if ($this->form_validation->run()) {
 			if ($user = $this->login($this->post('email'), $this->post('password'))) {
-				
-		        $token = $this->jwtEncode(['id' => $user->id]);
+
+				$token = $this->jwtEncode(['id' => $user->id]);
+
 
 				$decoded = $this->getUser($token);
+
 
 				$this->response([
 					'status' => true,

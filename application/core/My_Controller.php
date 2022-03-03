@@ -889,13 +889,16 @@ class API extends REST_Controller
     */
     public function getHeader($key)
     {
-        $headers = getallheaders();
+	    $headers = getallheaders();
+	    $val = false;
 
         if (isset($headers[$key])) {
             return $headers[$key];
-        }
+        } else if (isset($headers[strtolower($key)])) {
+            return $headers[strtolower($key)];
+        } 
 
-        return false;
+        return $val;
     }
 
     /**

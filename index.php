@@ -1,5 +1,16 @@
 <?php
+/**file_put_contents("test.log", print_r($_SERVER, true), FILE_APPEND);
+
+file_put_contents("test.log", "posttt\n\n\n\n", FILE_APPEND);
+file_put_contents("test.log", print_r($_POST, true), FILE_APPEND);
+
+$js_datA_tes = file_get_contents('php://input');
+file_put_contents("test.log", "jsondata\n\n\n\n", FILE_APPEND);
+file_put_contents("test.log", print_r($js_datA_tes, true), FILE_APPEND);
+**/
+
 /**
+ *
  * CodeIgniter
  *
  * An open source application development framework for PHP

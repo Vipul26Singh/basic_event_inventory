@@ -1,0 +1,240 @@
+Array
+(
+    [REDIRECT_SCRIPT_URL] => /crisp_inventory/api/user/login
+    [REDIRECT_SCRIPT_URI] => http://34.79.101.196/crisp_inventory/api/user/login
+    [REDIRECT_STATUS] => 200
+    [SCRIPT_URL] => /crisp_inventory/api/user/login
+    [SCRIPT_URI] => http://34.79.101.196/crisp_inventory/api/user/login
+    [HTTP_USER_AGENT] => Dart/2.16 (dart:io)
+    [CONTENT_TYPE] => application/json; charset=utf-8
+    [HTTP_X_API_KEY] => 632F2EC9771B6C4C0BDF30BE21D9009B
+    [HTTP_ACCEPT_ENCODING] => gzip
+    [CONTENT_LENGTH] => 53
+    [HTTP_HOST] => 34.79.101.196
+    [PATH] => /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
+    [SERVER_SIGNATURE] => <address>Apache/2.4.29 (Ubuntu) Server at 34.79.101.196 Port 80</address>
+
+    [SERVER_SOFTWARE] => Apache/2.4.29 (Ubuntu)
+    [SERVER_NAME] => 34.79.101.196
+    [SERVER_ADDR] => 10.132.0.2
+    [SERVER_PORT] => 80
+    [REMOTE_ADDR] => 34.79.101.196
+    [DOCUMENT_ROOT] => /var/www/html
+    [REQUEST_SCHEME] => http
+    [CONTEXT_PREFIX] => 
+    [CONTEXT_DOCUMENT_ROOT] => /var/www/html
+    [SERVER_ADMIN] => webmaster@localhost
+    [SCRIPT_FILENAME] => /var/www/html/crisp_inventory/index.php
+    [REMOTE_PORT] => 42208
+    [REDIRECT_URL] => /crisp_inventory/api/user/login
+    [REDIRECT_QUERY_STRING] => /
+    [GATEWAY_INTERFACE] => CGI/1.1
+    [SERVER_PROTOCOL] => HTTP/1.1
+    [REQUEST_METHOD] => POST
+    [QUERY_STRING] => /
+    [REQUEST_URI] => /crisp_inventory/api/user/login
+    [SCRIPT_NAME] => /crisp_inventory/index.php
+    [PHP_SELF] => /crisp_inventory/index.php
+    [REQUEST_TIME_FLOAT] => 1646333478.569
+    [REQUEST_TIME] => 1646333478
+)
+posttt
+
+
+
+Array
+(
+)
+jsondata
+
+
+
+{"email":"sevoyoung1@gmail.com","password":"1234567"}Array
+(
+    [REDIRECT_SCRIPT_URL] => /crisp_inventory/api/user/login
+    [REDIRECT_SCRIPT_URI] => http://34.79.101.196/crisp_inventory/api/user/login
+    [REDIRECT_STATUS] => 200
+    [SCRIPT_URL] => /crisp_inventory/api/user/login
+    [SCRIPT_URI] => http://34.79.101.196/crisp_inventory/api/user/login
+    [HTTP_USER_AGENT] => Dart/2.16 (dart:io)
+    [CONTENT_TYPE] => application/json; charset=utf-8
+    [HTTP_X_API_KEY] => 632F2EC9771B6C4C0BDF30BE21D9009B
+    [HTTP_ACCEPT_ENCODING] => gzip
+    [CONTENT_LENGTH] => 53
+    [HTTP_HOST] => 34.79.101.196
+    [PATH] => /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
+    [SERVER_SIGNATURE] => <address>Apache/2.4.29 (Ubuntu) Server at 34.79.101.196 Port 80</address>
+
+    [SERVER_SOFTWARE] => Apache/2.4.29 (Ubuntu)
+    [SERVER_NAME] => 34.79.101.196
+    [SERVER_ADDR] => 10.132.0.2
+    [SERVER_PORT] => 80
+    [REMOTE_ADDR] => 34.79.101.196
+    [DOCUMENT_ROOT] => /var/www/html
+    [REQUEST_SCHEME] => http
+    [CONTEXT_PREFIX] => 
+    [CONTEXT_DOCUMENT_ROOT] => /var/www/html
+    [SERVER_ADMIN] => webmaster@localhost
+    [SCRIPT_FILENAME] => /var/www/html/crisp_inventory/index.php
+    [REMOTE_PORT] => 42376
+    [REDIRECT_URL] => /crisp_inventory/api/user/login
+    [REDIRECT_QUERY_STRING] => /
+    [GATEWAY_INTERFACE] => CGI/1.1
+    [SERVER_PROTOCOL] => HTTP/1.1
+    [REQUEST_METHOD] => POST
+    [QUERY_STRING] => /
+    [REQUEST_URI] => /crisp_inventory/api/user/login
+    [SCRIPT_NAME] => /crisp_inventory/index.php
+    [PHP_SELF] => /crisp_inventory/index.php
+    [REQUEST_TIME_FLOAT] => 1646333640.284
+    [REQUEST_TIME] => 1646333640
+)
+posttt
+
+
+
+Array
+(
+)
+jsondata
+
+
+
+{"email":"sevoyoung1@gmail.com","password":"1234567"}Array
+(
+    [REDIRECT_SCRIPT_URL] => /crisp_inventory/api/user/login
+    [REDIRECT_SCRIPT_URI] => http://34.79.101.196/crisp_inventory/api/user/login
+    [REDIRECT_STATUS] => 200
+    [SCRIPT_URL] => /crisp_inventory/api/user/login
+    [SCRIPT_URI] => http://34.79.101.196/crisp_inventory/api/user/login
+    [HTTP_USER_AGENT] => Dart/2.16 (dart:io)
+    [CONTENT_TYPE] => application/json; charset=utf-8
+    [HTTP_X_API_KEY] => 632F2EC9771B6C4C0BDF30BE21D9009B
+    [HTTP_ACCEPT_ENCODING] => gzip
+    [CONTENT_LENGTH] => 53
+    [HTTP_HOST] => 34.79.101.196
+    [PATH] => /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
+    [SERVER_SIGNATURE] => <address>Apache/2.4.29 (Ubuntu) Server at 34.79.101.196 Port 80</address>
+
+    [SERVER_SOFTWARE] => Apache/2.4.29 (Ubuntu)
+    [SERVER_NAME] => 34.79.101.196
+    [SERVER_ADDR] => 10.132.0.2
+    [SERVER_PORT] => 80
+    [REMOTE_ADDR] => 34.79.101.196
+    [DOCUMENT_ROOT] => /var/www/html
+    [REQUEST_SCHEME] => http
+    [CONTEXT_PREFIX] => 
+    [CONTEXT_DOCUMENT_ROOT] => /var/www/html
+    [SERVER_ADMIN] => webmaster@localhost
+    [SCRIPT_FILENAME] => /var/www/html/crisp_inventory/index.php
+    [REMOTE_PORT] => 42502
+    [REDIRECT_URL] => /crisp_inventory/api/user/login
+    [REDIRECT_QUERY_STRING] => /
+    [GATEWAY_INTERFACE] => CGI/1.1
+    [SERVER_PROTOCOL] => HTTP/1.1
+    [REQUEST_METHOD] => POST
+    [QUERY_STRING] => /
+    [REQUEST_URI] => /crisp_inventory/api/user/login
+    [SCRIPT_NAME] => /crisp_inventory/index.php
+    [PHP_SELF] => /crisp_inventory/index.php
+    [REQUEST_TIME_FLOAT] => 1646333874.25
+    [REQUEST_TIME] => 1646333874
+)
+posttt
+
+
+
+Array
+(
+)
+jsondata
+
+
+
+{"email":"sevoyoung1@gmail.com","password":"1234567"}Array
+(
+    [REDIRECT_SCRIPT_URL] => /crisp_inventory/api/user/login
+    [REDIRECT_SCRIPT_URI] => http://34.79.101.196/crisp_inventory/api/user/login
+    [REDIRECT_STATUS] => 200
+    [SCRIPT_URL] => /crisp_inventory/api/user/login
+    [SCRIPT_URI] => http://34.79.101.196/crisp_inventory/api/user/login
+    [HTTP_USER_AGENT] => Dart/2.16 (dart:io)
+    [CONTENT_TYPE] => application/json; charset=utf-8
+    [HTTP_X_API_KEY] => 632F2EC9771B6C4C0BDF30BE21D9009B
+    [HTTP_ACCEPT_ENCODING] => gzip
+    [CONTENT_LENGTH] => 53
+    [HTTP_HOST] => 34.79.101.196
+    [PATH] => /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
+    [SERVER_SIGNATURE] => <address>Apache/2.4.29 (Ubuntu) Server at 34.79.101.196 Port 80</address>
+
+    [SERVER_SOFTWARE] => Apache/2.4.29 (Ubuntu)
+    [SERVER_NAME] => 34.79.101.196
+    [SERVER_ADDR] => 10.132.0.2
+    [SERVER_PORT] => 80
+    [REMOTE_ADDR] => 34.79.101.196
+    [DOCUMENT_ROOT] => /var/www/html
+    [REQUEST_SCHEME] => http
+    [CONTEXT_PREFIX] => 
+    [CONTEXT_DOCUMENT_ROOT] => /var/www/html
+    [SERVER_ADMIN] => webmaster@localhost
+    [SCRIPT_FILENAME] => /var/www/html/crisp_inventory/index.php
+    [REMOTE_PORT] => 42638
+    [REDIRECT_URL] => /crisp_inventory/api/user/login
+    [REDIRECT_QUERY_STRING] => /
+    [GATEWAY_INTERFACE] => CGI/1.1
+    [SERVER_PROTOCOL] => HTTP/1.1
+    [REQUEST_METHOD] => POST
+    [QUERY_STRING] => /
+    [REQUEST_URI] => /crisp_inventory/api/user/login
+    [SCRIPT_NAME] => /crisp_inventory/index.php
+    [PHP_SELF] => /crisp_inventory/index.php
+    [REQUEST_TIME_FLOAT] => 1646334005.25
+    [REQUEST_TIME] => 1646334005
+)
+posttt
+
+
+
+Array
+(
+)
+jsondata
+
+
+
+{"email":"sevoyoung1@gmail.com","password":"1234567"}Array
+(
+    [user-agent] => Dart/2.16 (dart:io)
+    [content-type] => application/json; charset=utf-8
+    [x-api-key] => 632F2EC9771B6C4C0BDF30BE21D9009B
+    [accept-encoding] => gzip
+    [content-length] => 53
+    [host] => 34.79.101.196
+)
+Array
+(
+    [user-agent] => Dart/2.16 (dart:io)
+    [content-type] => application/json; charset=utf-8
+    [x-api-key] => 632F2EC9771B6C4C0BDF30BE21D9009B
+    [accept-encoding] => gzip
+    [content-length] => 53
+    [host] => 34.79.101.196
+)
+Array
+(
+    [user-agent] => Dart/2.16 (dart:io)
+    [content-type] => application/json; charset=utf-8
+    [x-api-key] => 632F2EC9771B6C4C0BDF30BE21D9009B
+    [accept-encoding] => gzip
+    [content-length] => 53
+    [host] => 34.79.101.196
+)
+Array
+(
+    [user-agent] => Dart/2.16 (dart:io)
+    [content-type] => application/json; charset=utf-8
+    [x-api-key] => 632F2EC9771B6C4C0BDF30BE21D9009B
+    [accept-encoding] => gzip
+    [content-length] => 53
+    [host] => 34.79.101.196
+)
