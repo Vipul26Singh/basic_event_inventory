@@ -158,7 +158,7 @@ class User extends API
 	 */
 	public function all_get()
 	{
-		$this->is_allowed('api_user_all');
+		$this->is_allowed('user_list');
 
 		$filter = $this->get('filter');
 		$field = $this->get('field');
@@ -210,7 +210,7 @@ class User extends API
 	 */
 	public function detail_get()
 	{
-		$this->is_allowed('api_user_detail');
+		$this->is_allowed('user_profile');
 
 		$this->requiredInput(['id']);
 
@@ -261,7 +261,7 @@ class User extends API
 	 */
 	public function add_post()
 	{
-		$this->is_allowed('api_user_add');
+		$this->is_allowed('user_add');
 
 		//$this->form_validation->set_rules('username', 'Username', 'trim|required|is_unique[aauth_users.username]');
 		$this->form_validation->set_rules('email', 'Email', 'trim|required|is_unique[aauth_users.email]|valid_email');
@@ -431,7 +431,7 @@ class User extends API
 	 */
 	public function update_post()
 	{
-		$this->is_allowed('api_user_update');
+		$this->is_allowed('user_update');
 
 		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
 		$this->form_validation->set_rules('full_name', 'Full Name', 'trim|required');
@@ -525,7 +525,7 @@ class User extends API
 	 */
 	public function update_profile_post()
 	{
-		$this->is_allowed('api_user_update_profile');
+		$this->is_allowed('user_update_profile');
 
 		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
 		$this->form_validation->set_rules('full_name', 'Full Name', 'trim|required');
@@ -615,7 +615,7 @@ class User extends API
 	 */
 	public function delete_post()
 	{
-		$this->is_allowed('api_user_delete');
+		$this->is_allowed('user_delete');
 
 		$this->requiredInput(['id']);
 
@@ -677,7 +677,7 @@ class User extends API
 	 */
 	public function profile_get()
 	{
-		$this->is_allowed('api_user_profile');
+		$this->is_allowed('user_profile');
 
 		$user = $this->getUser($this->jwtGetToken());
 
