@@ -53,8 +53,30 @@ class Event_equipment_checklist extends API
 		$event_equipment_checklists = $this->model_api_event_equipment_checklist->get($filter, $field, $limit, $start, $select_field);
 		$total = $this->model_api_event_equipment_checklist->count_all($filter, $field);
 
+		$event_equipment_checklists = array_map(function ($a) { 
+			$a->event = $this->db->query("select event_name, event_type, event_location, check_in_date, check_out_date from events where id = '{$a->event_id}'")->row();
+
+
+			$a->equipment = $this->db->query("select equipment_name, equipment_condition, equipment_size, equipment_barcode, equipment_category_id, equipment_image from equipments where id = '{$a->equipment_id}'")->row();
+
+			if($a->equipment) {
+				$a->equipment->category = $this->db->query("select name, image from equipment_category where id = '{$a->equipment->equipment_category_id}'")->row();
+
+				if(!empty($a->equipment->equipment_image)) {
+                                        $a->equipment->equipment_image  = BASE_URL.'uploads/equipments/'.$a->equipment->equipment_image;
+				}
+
+				if($a->equipment->category && $a->equipment->category->image) {
+                                        $a->equipment->category->image = BASE_URL.'uploads/equipment_category/'.$a->equipment->category->image;
+                                }
+			}
+			return $a; 
+		}, $event_equipment_checklists);
+
+
+
 		$data['event_equipment_checklist'] = $event_equipment_checklists;
-				
+
 		$this->response([
 			'status' 	=> true,
 			'message' 	=> 'Data Event equipment checklist',
@@ -99,8 +121,25 @@ class Event_equipment_checklist extends API
 		$select_field = ['id', 'event_id', 'equipment_id'];
 		$data['event_equipment_checklist'] = $this->model_api_event_equipment_checklist->find($id, $select_field);
 
+		$data['event_equipment_checklist']->event = $this->db->query("select event_name, event_type, event_location, check_in_date, check_out_date from events where id = '{$data['event_equipment_checklist']->event_id}'")->row();
+
+
+		$data['event_equipment_checklist']->equipment = $this->db->query("select equipment_name, equipment_condition, equipment_size, equipment_barcode, equipment_category_id, equipment_image from equipments where id = '{$data['event_equipment_checklist']->equipment_id}'")->row();
+
+		if($data['event_equipment_checklist']->equipment) {
+			$data['event_equipment_checklist']->equipment->category = $this->db->query("select name, image from equipment_category where id = '{$data['event_equipment_checklist']->equipment->equipment_category_id}'")->row();
+
+                                $data['event_equipment_checklist']->equipment->equipment_image  = BASE_URL.'uploads/equipments/'.$data['event_equipment_checklist']->equipment->equipment_image;
+                        }
+
+                        if($data['event_equipment_checklist']->equipment->category && $data['event_equipment_checklist']->equipment->category->image) {
+                                $data['event_equipment_checklist']->equipment->category->image = BASE_URL.'uploads/equipment_category/'.$data['event_equipment_checklist']->equipment->category->image;
+                        }
+		}
+
+
 		if ($data['event_equipment_checklist']) {
-			
+
 			$this->response([
 				'status' 	=> true,
 				'message' 	=> 'Detail Event equipment checklist',

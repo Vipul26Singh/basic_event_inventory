@@ -18,10 +18,11 @@ class Equipments_available extends API
 	 * @apiName AllEquipmentsavailable 
 	 * @apiGroup equipments_available
 	 * @apiHeader {String} X-Api-Key Equipments availables unique access-key.
+	 * @apiHeader {String} X-Token Equipments availables unique token.
 	 * @apiPermission Equipments available Cant be Accessed permission name : api_equipments_available_all
 	 *
 	 * @apiParam {String} [Filter=null] Optional filter of Equipments availables.
-	 * @apiParam {String} [Field="All Field"] Optional field of Equipments availables : id, equipment_name, equipment_condition, equipment_size, equipment_description, equipment_barcode, equipment_category_id, equipment_image.
+	 * @apiParam {String} [Field="All Field"] Optional field of Equipments availables : equipment_name, equipment_id, equipment_condition, equipment_category_id, equipment_barcode, equipment_image.
 	 * @apiParam {String} [Start=0] Optional start index of Equipments availables.
 	 * @apiParam {String} [Limit=10] Optional limit data of Equipments availables.
 	 *
@@ -41,14 +42,14 @@ class Equipments_available extends API
 	 */
 	public function all_get()
 	{
-		$this->is_allowed('api_equipments_available_all', false);
+		$this->is_allowed('api_equipments_available_all');
 
 		$filter = $this->get('filter');
 		$field = $this->get('field');
 		$limit = $this->get('limit') ? $this->get('limit') : $this->limit_page;
 		$start = $this->get('start');
 
-		$select_field = ['id', 'equipment_name', 'equipment_condition', 'equipment_size', 'equipment_description', 'equipment_barcode', 'equipment_category_id', 'equipment_image'];
+		$select_field = ['equipment_name', 'equipment_id', 'equipment_condition', 'equipment_category_id', 'equipment_barcode', 'equipment_image'];
 		$equipments_availables = $this->model_api_equipments_available->get($filter, $field, $limit, $start, $select_field);
 		$total = $this->model_api_equipments_available->count_all($filter, $field);
 
@@ -80,6 +81,7 @@ class Equipments_available extends API
 	 * @apiName DetailEquipments available
 	 * @apiGroup equipments_available
 	 * @apiHeader {String} X-Api-Key Equipments availables unique access-key.
+	 * @apiHeader {String} X-Token Equipments availables unique token.
 	 * @apiPermission Equipments available Cant be Accessed permission name : api_equipments_available_detail
 	 *
 	 * @apiParam {Integer} Id Mandatory id of Equipments availables.
@@ -99,13 +101,13 @@ class Equipments_available extends API
 	 */
 	public function detail_get()
 	{
-		$this->is_allowed('api_equipments_available_detail', false);
+		$this->is_allowed('api_equipments_available_detail');
 
 		$this->requiredInput(['']);
 
 		$id = $this->get('');
 
-		$select_field = ['id', 'equipment_name', 'equipment_condition', 'equipment_size', 'equipment_description', 'equipment_barcode', 'equipment_category_id', 'equipment_image'];
+		$select_field = ['equipment_name', 'equipment_id', 'equipment_condition', 'equipment_category_id', 'equipment_barcode', 'equipment_image'];
 		$data['equipments_available'] = $this->model_api_equipments_available->find($id, $select_field);
 
 		if ($data['equipments_available']) {
@@ -135,9 +137,16 @@ class Equipments_available extends API
 	 * @apiName AddEquipments available
 	 * @apiGroup equipments_available
 	 * @apiHeader {String} X-Api-Key Equipments availables unique access-key.
+	 * @apiHeader {String} X-Token Equipments availables unique token.
 	 * @apiPermission Equipments available Cant be Accessed permission name : api_equipments_available_add
 	 *
- 	 *
+ 	 * @apiParam {String} Equipment_name Mandatory equipment_name of Equipments availables. Input Equipment Name Max Length : 4096. 
+	 * @apiParam {String} Equipment_id Mandatory equipment_id of Equipments availables. Input Equipment Id Max Length : 11. 
+	 * @apiParam {String} Equipment_condition Mandatory equipment_condition of Equipments availables. Input Equipment Condition Max Length : 100. 
+	 * @apiParam {String} Equipment_category_id Mandatory equipment_category_id of Equipments availables. Input Equipment Category Id Max Length : 11. 
+	 * @apiParam {String} Equipment_barcode Mandatory equipment_barcode of Equipments availables. Input Equipment Barcode Max Length : 4096. 
+	 * @apiParam {File} Equipment_image Mandatory equipment_image of Equipments availables.  
+	 *
 	 * @apiSuccess {Boolean} Status status response api.
 	 * @apiSuccess {String} Message message response api.
 	 *
@@ -152,14 +161,37 @@ class Equipments_available extends API
 	 */
 	public function add_post()
 	{
-		$this->is_allowed('api_equipments_available_add', false);
+		$this->is_allowed('api_equipments_available_add');
 
+		$this->form_validation->set_rules('equipment_name', 'Equipment Name', 'trim|required|max_length[4096]');
+		$this->form_validation->set_rules('equipment_id', 'Equipment Id', 'trim|required|max_length[11]');
+		$this->form_validation->set_rules('equipment_condition', 'Equipment Condition', 'trim|required|max_length[100]');
+		$this->form_validation->set_rules('equipment_category_id', 'Equipment Category Id', 'trim|required|max_length[11]');
+		$this->form_validation->set_rules('equipment_barcode', 'Equipment Barcode', 'trim|required|max_length[4096]');
 		
 		if ($this->form_validation->run()) {
 
 			$save_data = [
+				'equipment_name' => $this->input->post('equipment_name'),
+				'equipment_id' => $this->input->post('equipment_id'),
+				'equipment_condition' => $this->input->post('equipment_condition'),
+				'equipment_category_id' => $this->input->post('equipment_category_id'),
+				'equipment_barcode' => $this->input->post('equipment_barcode'),
+			];
+			if (!is_dir(FCPATH . '/uploads/equipments_available')) {
+				mkdir(FCPATH . '/uploads/equipments_available');
+			}
+			
+			$config = [
+				'upload_path' 	=> './uploads/equipments_available/',
+					'required' 		=> true
 			];
 			
+			if ($upload = $this->upload_file('equipment_image', $config)){
+				$upload_data = $this->upload->data();
+				$save_data['equipment_image'] = $upload['file_name'];
+			}
+
 			$save_equipments_available = $this->model_api_equipments_available->store($save_data);
 
 			if ($save_equipments_available) {
@@ -189,8 +221,15 @@ class Equipments_available extends API
 	 * @apiName UpdateEquipments available
 	 * @apiGroup equipments_available
 	 * @apiHeader {String} X-Api-Key Equipments availables unique access-key.
+	 * @apiHeader {String} X-Token Equipments availables unique token.
 	 * @apiPermission Equipments available Cant be Accessed permission name : api_equipments_available_update
 	 *
+	 * @apiParam {String} Equipment_name Mandatory equipment_name of Equipments availables. Input Equipment Name Max Length : 4096. 
+	 * @apiParam {String} Equipment_id Mandatory equipment_id of Equipments availables. Input Equipment Id Max Length : 11. 
+	 * @apiParam {String} Equipment_condition Mandatory equipment_condition of Equipments availables. Input Equipment Condition Max Length : 100. 
+	 * @apiParam {String} Equipment_category_id Mandatory equipment_category_id of Equipments availables. Input Equipment Category Id Max Length : 11. 
+	 * @apiParam {String} Equipment_barcode Mandatory equipment_barcode of Equipments availables. Input Equipment Barcode Max Length : 4096. 
+	 * @apiParam {File} Equipment_image Mandatory equipment_image of Equipments availables.  
 	 * @apiParam {Integer}  Mandatory  of Equipments Available.
 	 *
 	 * @apiSuccess {Boolean} Status status response api.
@@ -207,15 +246,38 @@ class Equipments_available extends API
 	 */
 	public function update_post()
 	{
-		$this->is_allowed('api_equipments_available_update', false);
+		$this->is_allowed('api_equipments_available_update');
 
 		
+		$this->form_validation->set_rules('equipment_name', 'Equipment Name', 'trim|required|max_length[4096]');
+		$this->form_validation->set_rules('equipment_id', 'Equipment Id', 'trim|required|max_length[11]');
+		$this->form_validation->set_rules('equipment_condition', 'Equipment Condition', 'trim|required|max_length[100]');
+		$this->form_validation->set_rules('equipment_category_id', 'Equipment Category Id', 'trim|required|max_length[11]');
+		$this->form_validation->set_rules('equipment_barcode', 'Equipment Barcode', 'trim|required|max_length[4096]');
 		
 		if ($this->form_validation->run()) {
 
 			$save_data = [
+				'equipment_name' => $this->input->post('equipment_name'),
+				'equipment_id' => $this->input->post('equipment_id'),
+				'equipment_condition' => $this->input->post('equipment_condition'),
+				'equipment_category_id' => $this->input->post('equipment_category_id'),
+				'equipment_barcode' => $this->input->post('equipment_barcode'),
+			];
+			if (!is_dir(FCPATH . '/uploads/equipments_available')) {
+				mkdir(FCPATH . '/uploads/equipments_available');
+			}
+			
+			$config = [
+				'upload_path' 	=> './uploads/equipments_available/',
+					'required' 		=> true
 			];
 			
+			if ($upload = $this->upload_file('equipment_image', $config)){
+				$upload_data = $this->upload->data();
+				$save_data['equipment_image'] = $upload['file_name'];
+			}
+
 			$save_equipments_available = $this->model_api_equipments_available->change($this->post(''), $save_data);
 
 			if ($save_equipments_available) {
@@ -245,6 +307,7 @@ class Equipments_available extends API
 	 * @apiName DeleteEquipments available
 	 * @apiGroup equipments_available
 	 * @apiHeader {String} X-Api-Key Equipments availables unique access-key.
+	 * @apiHeader {String} X-Token Equipments availables unique token.
 	 	 * @apiPermission Equipments available Cant be Accessed permission name : api_equipments_available_delete
 	 *
 	 * @apiParam {Integer} Id Mandatory id of Equipments availables .
@@ -263,7 +326,7 @@ class Equipments_available extends API
 	 */
 	public function delete_post()
 	{
-		$this->is_allowed('api_equipments_available_delete', false);
+		$this->is_allowed('api_equipments_available_delete');
 
 		$equipments_available = $this->model_api_equipments_available->find($this->post(''));
 
@@ -276,7 +339,7 @@ class Equipments_available extends API
 			$delete = $this->model_api_equipments_available->remove($this->post(''));
 
 			if (!empty($equipments_available->equipment_image)) {
-				$path = FCPATH . '/uploads/equipments/' . $equipments_available->equipment_image;
+				$path = FCPATH . '/uploads/equipments_available/' . $equipments_available->equipment_image;
 
 				if (is_file($path)) {
 					$delete_file = unlink($path);

@@ -436,7 +436,6 @@ class User extends API
 		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
 		$this->form_validation->set_rules('full_name', 'Full Name', 'trim|required');
 		$this->form_validation->set_rules('password', 'Password', 'trim|min_length[6]');
-		$this->form_validation->set_rules('group', 'Group', 'trim|callback_valid_group');
 		$this->form_validation->set_rules('id', 'Id', 'trim|required');
 
 		if ($this->form_validation->run()) {
@@ -466,13 +465,16 @@ class User extends API
 			$save_user = $this->aauth->update_user($this->post('id'), $this->post('email'), $password, null, $save_data);
 
 			if ($save_user) {
-				$group = json_decode($this->post('group'));
+				$all_gr = $this->post('group');
+				if(!empty($all_gr)) {
+					$group = json_decode($this->post('group'));
 
-				$this->db->delete('aauth_user_to_group', ['user_id' => $this->post('id')]);
-				if (is_array($group) AND count($group)) {
-					$user_id = $save_user;
-					foreach ($this->post('group') as $group_id) {
-						$this->aauth->add_member($user_id, $group_id);				
+					$this->db->delete('aauth_user_to_group', ['user_id' => $this->post('id')]);
+					if (is_array($group) AND count($group)) {
+						$user_id = $save_user;
+						foreach ($this->post('group') as $group_id) {
+							$this->aauth->add_member($user_id, $group_id);				
+						}
 					}
 				}
 
@@ -530,7 +532,6 @@ class User extends API
 		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
 		$this->form_validation->set_rules('full_name', 'Full Name', 'trim|required');
 		$this->form_validation->set_rules('password', 'Password', 'trim|min_length[6]');
-		$this->form_validation->set_rules('group', 'Group', 'trim|callback_valid_group');
 
 		if ($this->form_validation->run()) {
 
@@ -556,18 +557,23 @@ class User extends API
 				$password = null;
 			}
 
+
 			$id = $this->getUserData('id');
 
 			$save_user = $this->aauth->update_user($id, $this->post('email'), $password, null, $save_data);
 
 			if ($save_user) {
-				$group = json_decode($this->post('group'));
+				$all_gr = $this->post('group');
 
-				$this->db->delete('aauth_user_to_group', ['user_id' => $id]);
-				if (is_array($group) AND count($group)) {
-					$user_id = $save_user;
-					foreach ($this->post('group') as $group_id) {
-						$this->aauth->add_member($user_id, $group_id);				
+				if(!empty($all_gr)) {
+					$group = json_decode($this->post('group'));
+
+					$this->db->delete('aauth_user_to_group', ['user_id' => $id]);
+					if (is_array($group) AND count($group)) {
+						$user_id = $save_user;
+						foreach ($this->post('group') as $group_id) {
+							$this->aauth->add_member($user_id, $group_id);				
+						}
 					}
 				}
 

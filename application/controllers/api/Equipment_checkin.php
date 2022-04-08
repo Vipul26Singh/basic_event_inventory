@@ -53,6 +53,28 @@ class Equipment_checkin extends API
 		$equipment_checkins = $this->model_api_equipment_checkin->get($filter, $field, $limit, $start, $select_field);
 		$total = $this->model_api_equipment_checkin->count_all($filter, $field);
 
+		$equipment_checkins = array_map(function ($a) {
+                        $a->event = $this->db->query("select event_name, event_type, event_location, check_in_date, check_out_date from events where id = '{$a->event_id}'")->row();
+
+
+                        $a->equipment = $this->db->query("select equipment_name, equipment_condition, equipment_size, equipment_barcode, equipment_category_id, equipment_image from equipments where id = '{$a->equipment_id}'")->row();
+
+                        if($a->equipment) {
+				$a->equipment->category = $this->db->query("select name, image from equipment_category where id = '{$a->equipment->equipment_category_id}'")->row();
+				if(!empty($a->equipment->equipment_image)) {
+                        		$a->equipment->equipment_image  = BASE_URL.'uploads/equipments/'.$a->equipment->equipment_image;
+				}
+
+				if($a->equipment->category && $a->equipment->category->image) {
+					$a->equipment->category->image = BASE_URL.'uploads/equipment_category/'.$a->equipment->category->image;
+				}
+
+
+                        }
+                        return $a;
+                }, $equipment_checkins);
+
+
 		$data['equipment_checkin'] = $equipment_checkins;
 				
 		$this->response([
@@ -98,6 +120,23 @@ class Equipment_checkin extends API
 
 		$select_field = ['id', 'equipment_id', 'equipment_in_datetime'];
 		$data['equipment_checkin'] = $this->model_api_equipment_checkin->find($id, $select_field);
+
+		$data['equipment_checkin']->event = $this->db->query("select event_name, event_type, event_location, check_in_date, check_out_date from events where id = '{$data['equipment_checkin']->event_id}'")->row();
+
+
+                $data['equipment_checkin']->equipment = $this->db->query("select equipment_name, equipment_condition, equipment_size, equipment_barcode, equipment_category_id, equipment_image from equipments where id = '{$data['equipment_checkin']->equipment_id}'")->row();
+
+		if($data['equipment_checkin']->equipment) {
+			$data['equipment_checkin']->equipment->category = $this->db->query("select name, image from equipment_category where id = '{$data['equipment_checkin']->equipment->equipment_category_id}'")->row();
+
+			if(!empty($data['equipment_checkin']->equipment->equipment_image)) {
+				$data['equipment_checkin']->equipment->equipment_image  = BASE_URL.'uploads/equipments/'.$data['equipment_checkin']->equipment->equipment_image;
+			}
+
+			if($data['equipment_checkin']->equipment->category && $data['equipment_checkin']->equipment->category->image) {
+				$data['equipment_checkin']->equipment->category->image = BASE_URL.'uploads/equipment_category/'.$data['equipment_checkin']->equipment->category->image;
+			}
+		}
 
 		if ($data['equipment_checkin']) {
 			
@@ -155,6 +194,8 @@ class Equipment_checkin extends API
 			$save_equipment_checkin = $this->model_api_equipment_checkin->store($save_data);
 
 			if ($save_equipment_checkin) {
+				$eq_id = $this->input->post('equipment_id');
+				$this->db->query("update event_equipment_checkout set is_returned = 1 and return_date = now() where equipment_id = '{$eq_id}'");
 				$this->response([
 					'status' 	=> true,
 					'message' 	=> 'Your data has been successfully stored into the database'

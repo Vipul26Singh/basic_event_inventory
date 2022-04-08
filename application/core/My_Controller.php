@@ -910,7 +910,8 @@ class API extends REST_Controller
     */
     public function getUser($token = null)
     {
-        $data_user = JWT::decode($token, $this->jwtGetKey(), array('HS256'));
+	    $data_user = JWT::decode($token, $this->jwtGetKey(), array('HS256'));
+
 
         if (isset($data_user->data->id)) {
             $id = $data_user->data->id;
@@ -970,17 +971,18 @@ class API extends REST_Controller
     */
     public function getUserData($field_name = false)
     {
-        $user = $this->getUser($this->jwtGetToken());
+	    $user = $this->getUser($this->jwtGetToken());
 
-        if (!$user) {
-            if ($field_name) {
-                if (isset($user->$field_name)) {
-                    return $user->$field_name;
-                }
-            } else {
-                return $user;
-            }
-        }
+
+	    if (!empty($user)) {
+		    if ($field_name) {
+			    if (isset($user->$field_name)) {
+				    return $user->$field_name;
+			    }
+		    } else {
+			    return $user;
+		    }
+	    }
 
         return false;
     }

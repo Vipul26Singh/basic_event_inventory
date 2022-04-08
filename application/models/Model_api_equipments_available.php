@@ -5,7 +5,7 @@ class Model_api_equipments_available extends MY_Model {
 
 	private $primary_key 	= '';
 	private $table_name 	= 'equipments_available';
-	private $field_search 	= ['id', 'equipment_name', 'equipment_condition', 'equipment_size', 'equipment_description', 'equipment_barcode', 'equipment_category_id', 'equipment_image'];
+	private $field_search 	= ['equipment_name', 'equipment_id', 'equipment_condition', 'equipment_category_id', 'equipment_barcode', 'equipment_image'];
 
 	public function __construct()
 	{
