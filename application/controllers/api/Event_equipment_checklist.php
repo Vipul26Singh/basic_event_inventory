@@ -130,7 +130,6 @@ class Event_equipment_checklist extends API
 			$data['event_equipment_checklist']->equipment->category = $this->db->query("select name, image from equipment_category where id = '{$data['event_equipment_checklist']->equipment->equipment_category_id}'")->row();
 
                                 $data['event_equipment_checklist']->equipment->equipment_image  = BASE_URL.'uploads/equipments/'.$data['event_equipment_checklist']->equipment->equipment_image;
-                        }
 
                         if($data['event_equipment_checklist']->equipment->category && $data['event_equipment_checklist']->equipment->category->image) {
                                 $data['event_equipment_checklist']->equipment->category->image = BASE_URL.'uploads/equipment_category/'.$data['event_equipment_checklist']->equipment->category->image;

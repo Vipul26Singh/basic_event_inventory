@@ -195,7 +195,8 @@ class Equipment_checkin extends API
 
 			if ($save_equipment_checkin) {
 				$eq_id = $this->input->post('equipment_id');
-				$this->db->query("update event_equipment_checkout set is_returned = 1 and return_date = now() where equipment_id = '{$eq_id}'");
+				$sql = "update event_equipment_checkout set is_returned = 1, return_date = now() where equipment_id = ?";
+				$this->db->query($sql, array($eq_id));
 				$this->response([
 					'status' 	=> true,
 					'message' 	=> 'Your data has been successfully stored into the database'

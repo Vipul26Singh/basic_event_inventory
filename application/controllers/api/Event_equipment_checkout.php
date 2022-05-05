@@ -49,7 +49,7 @@ class Event_equipment_checkout extends API
 		$limit = $this->get('limit') ? $this->get('limit') : $this->limit_page;
 		$start = $this->get('start');
 
-		$select_field = ['id', 'event_id', 'equipment_id', 'equipment_out_datetime'];
+		$select_field = ['id', 'event_id', 'equipment_id', 'equipment_out_datetime', 'is_returned'];
 		$event_equipment_checkouts = $this->model_api_event_equipment_checkout->get($filter, $field, $limit, $start, $select_field);
 		$total = $this->model_api_event_equipment_checkout->count_all($filter, $field);
 
@@ -117,7 +117,7 @@ class Event_equipment_checkout extends API
 
 		$id = $this->get('id');
 
-		$select_field = ['id', 'event_id', 'equipment_id', 'equipment_out_datetime'];
+		$select_field = ['id', 'event_id', 'equipment_id', 'equipment_out_datetime', 'is_returned'];
 		$data['event_equipment_checkout'] = $this->model_api_event_equipment_checkout->find($id, $select_field);
 
 		$data['event_equipment_checkout']->event = $this->db->query("select event_name, event_type, event_location, check_in_date, check_out_date from events where id = '{$data['event_equipment_checkout']->event_id}'")->row();

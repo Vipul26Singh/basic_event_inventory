@@ -155,15 +155,17 @@ class Events extends API
 		$this->form_validation->set_rules('event_name', 'Event Name', 'trim|required|max_length[2048]');
 		$this->form_validation->set_rules('event_type', 'Event Type', 'trim|required|max_length[128]');
 		$this->form_validation->set_rules('event_location', 'Event Location', 'trim|required|max_length[4096]');
-		
+		$this->form_validation->set_rules('check_in_date', 'Check in date', 'trim|required|max_length[4096]');
+		$this->form_validation->set_rules('check_out_date', 'Check out date', 'trim|required|max_length[4096]');
+
 		if ($this->form_validation->run()) {
 
 			$save_data = [
 				'event_name' => $this->input->post('event_name'),
 				'event_type' => $this->input->post('event_type'),
 				'event_location' => $this->input->post('event_location'),
-				'check_in_date' => date('Y-m-d H:i:s'),
-				'check_out_date' => date('Y-m-d H:i:s'),
+				'check_in_date' => $this->input->post('check_in_date'),
+				'check_out_date' => $this->input->post('check_out_date'),
 			];
 			
 			$config = [
@@ -235,6 +237,8 @@ class Events extends API
 		$this->form_validation->set_rules('event_name', 'Event Name', 'trim|required|max_length[2048]');
 		$this->form_validation->set_rules('event_type', 'Event Type', 'trim|required|max_length[128]');
 		$this->form_validation->set_rules('event_location', 'Event Location', 'trim|required|max_length[4096]');
+		$this->form_validation->set_rules('check_in_date', 'Check in date', 'trim|required|max_length[4096]');
+                $this->form_validation->set_rules('check_out_date', 'Check out date', 'trim|required|max_length[4096]');
 		
 		if ($this->form_validation->run()) {
 
@@ -242,8 +246,8 @@ class Events extends API
 				'event_name' => $this->input->post('event_name'),
 				'event_type' => $this->input->post('event_type'),
 				'event_location' => $this->input->post('event_location'),
-				'check_in_date' => date('Y-m-d H:i:s'),
-				'check_out_date' => date('Y-m-d H:i:s'),
+				'check_in_date' => $this->input->post('check_in_date'),
+                                'check_out_date' => $this->input->post('check_out_date'),
 			];
 			
 			$config = [

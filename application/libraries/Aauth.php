@@ -1141,7 +1141,16 @@ class Aauth {
 			$this->aauth_db->where('user_id', $user_id);
 			$query = $this->aauth_db->get($this->config_vars['user_to_group']);
 		}
-		return $query->result();
+		$result =  $query->result();
+
+		foreach($result as $res) {
+			unset($res->created_by);
+			unset($res->updated_by);
+			unset($res->updated_at);
+			unset($res->created_at);
+		}
+
+		return $result;
 	}
 
 	//tested

@@ -217,6 +217,9 @@ class User extends API
 		$id = $this->get('id');
 
 		$data['user'] = $this->model_user->find($id);
+		$data['group'] = $this->aauth->get_user_groups($user->id);
+		unset($data['user']->pass);
+                $data['user']->avatar_thumbnail  = BASE_URL.'uploads/user/'.$data['user']->avatar;
 		
 		if (count($data['user'])) {
 			$this->response([
@@ -689,6 +692,9 @@ class User extends API
 
 		if (count($user)) {
 			$data['user'] = $this->model_user->find($user->id);
+			$data['group'] = $this->aauth->get_user_groups($user->id);
+			unset($data['user']->pass);
+                        $data['user']->avatar_thumbnail  = BASE_URL.'uploads/user/'.$data['user']->avatar;
 			
 			$this->response([
 				'status' 	=> true,
